@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		4AC2623F2289C676003EA11B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2623E2289C676003EA11B /* AppDelegate.swift */; };
-		4AC262412289C676003EA11B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC262402289C676003EA11B /* ViewController.swift */; };
+		4AC262412289C676003EA11B /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC262402289C676003EA11B /* SupportViewController.swift */; };
 		4AC262442289C676003EA11B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC262422289C676003EA11B /* Main.storyboard */; };
 		4AC262462289C677003EA11B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AC262452289C677003EA11B /* Assets.xcassets */; };
 		4AC262492289C677003EA11B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC262472289C677003EA11B /* LaunchScreen.storyboard */; };
+		4AC262532289F045003EA11B /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC262522289F045003EA11B /* PhoneNumber.swift */; };
+		4AC262552289F06E003EA11B /* SupportRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC262542289F06E003EA11B /* SupportRegion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4AC2623B2289C676003EA11B /* CallForSupport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallForSupport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC2623E2289C676003EA11B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4AC262402289C676003EA11B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4AC262402289C676003EA11B /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		4AC262432289C676003EA11B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4AC262452289C677003EA11B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AC262482289C677003EA11B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AC2624A2289C677003EA11B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AC262522289F045003EA11B /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
+		4AC262542289F06E003EA11B /* SupportRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRegion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				4AC2623E2289C676003EA11B /* AppDelegate.swift */,
-				4AC262402289C676003EA11B /* ViewController.swift */,
+				4AC262522289F045003EA11B /* PhoneNumber.swift */,
+				4AC262542289F06E003EA11B /* SupportRegion.swift */,
+				4AC262402289C676003EA11B /* SupportViewController.swift */,
 				4AC262422289C676003EA11B /* Main.storyboard */,
 				4AC262452289C677003EA11B /* Assets.xcassets */,
 				4AC262472289C677003EA11B /* LaunchScreen.storyboard */,
@@ -143,8 +149,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AC262412289C676003EA11B /* ViewController.swift in Sources */,
+				4AC262412289C676003EA11B /* SupportViewController.swift in Sources */,
 				4AC2623F2289C676003EA11B /* AppDelegate.swift in Sources */,
+				4AC262532289F045003EA11B /* PhoneNumber.swift in Sources */,
+				4AC262552289F06E003EA11B /* SupportRegion.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
