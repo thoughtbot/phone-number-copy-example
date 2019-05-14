@@ -15,6 +15,7 @@
 		4AC262532289F045003EA11B /* PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC262522289F045003EA11B /* PhoneNumber.swift */; };
 		4AC262552289F06E003EA11B /* SupportRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC262542289F06E003EA11B /* SupportRegion.swift */; };
 		4AD2368C228B5104004D5BFD /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD2368B228B5104004D5BFD /* HelpViewController.swift */; };
+		4AD2368E228B5494004D5BFD /* SupportRegionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD2368D228B5494004D5BFD /* SupportRegionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		4AC262522289F045003EA11B /* PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumber.swift; sourceTree = "<group>"; };
 		4AC262542289F06E003EA11B /* SupportRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRegion.swift; sourceTree = "<group>"; };
 		4AD2368B228B5104004D5BFD /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		4AD2368D228B5494004D5BFD /* SupportRegionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportRegionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				4AD2368B228B5104004D5BFD /* HelpViewController.swift */,
 				4AC262522289F045003EA11B /* PhoneNumber.swift */,
 				4AC262542289F06E003EA11B /* SupportRegion.swift */,
+				4AD2368D228B5494004D5BFD /* SupportRegionCell.swift */,
 				4AC262402289C676003EA11B /* SupportViewController.swift */,
 				4AC262422289C676003EA11B /* Main.storyboard */,
 				4AC262452289C677003EA11B /* Assets.xcassets */,
@@ -157,6 +160,7 @@
 				4AC262532289F045003EA11B /* PhoneNumber.swift in Sources */,
 				4AD2368E228B5494004D5BFD /* SupportRegionCell.swift in Sources */,
 				4AC262552289F06E003EA11B /* SupportRegion.swift in Sources */,
+				4AD2368C228B5104004D5BFD /* HelpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
