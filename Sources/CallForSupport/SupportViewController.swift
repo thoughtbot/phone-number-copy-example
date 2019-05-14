@@ -8,6 +8,7 @@ final class SupportViewController: UITableViewController {
   ]
 
   private var isOpeningPhoneURL = false
+  private var menuTimer: Timer?
 
   override var canBecomeFirstResponder: Bool {
     return true
@@ -61,16 +62,34 @@ extension SupportViewController {
 // MARK: - UITableViewDelegate
 
 extension SupportViewController {
+  override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+    menuTimer = Timer.scheduledTimer(
+      timeInterval: 0.5,
+      target: self,
+      selector: #selector(showMenu),
+      userInfo: indexPath,
+      repeats: false
+    )
+    return true
+  }
+
+  override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+    cancelMenuTimer()
+  }
+
+  override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    return UIMenuController.shared.isMenuVisible ? nil : indexPath
+  }
+
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let region = regions[indexPath.row]
+    defer { cancelMenuTimer() }
 
     UIApplication.shared.open(region.phoneNumber.url) { success in
       if success {
         self.isOpeningPhoneURL = true
       } else if let cell = tableView.cellForRow(at: indexPath) {
-        let menu = UIMenuController.shared
-        menu.setTargetRect(cell.frame, in: tableView)
-        menu.setMenuVisible(true, animated: true)
+        self.showMenu(cell)
       } else {
         tableView.deselectRow(at: indexPath, animated: true)
       }
@@ -93,5 +112,30 @@ private extension SupportViewController {
     default:
       break
     }
+  }
+
+  @objc func showMenu(_ sender: Any) {
+    let cell: UITableViewCell
+    defer { cancelMenuTimer() }
+
+    switch sender {
+    case let timer as Timer where timer == menuTimer:
+      let indexPath = timer.userInfo as! IndexPath
+      cell = tableView.cellForRow(at: indexPath)!
+      tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+    case let selectedCell as UITableViewCell:
+      cell = selectedCell
+    default:
+      return
+    }
+
+    let menu = UIMenuController.shared
+    menu.setTargetRect(cell.frame, in: tableView)
+    menu.setMenuVisible(true, animated: true)
+  }
+
+  func cancelMenuTimer() {
+    menuTimer?.invalidate()
+    menuTimer = nil
   }
 }
