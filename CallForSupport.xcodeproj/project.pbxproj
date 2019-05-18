@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A5F419B228FB7CD008CC016 /* LongPressTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5F419A228FB7CD008CC016 /* LongPressTableViewDelegate.swift */; };
 		4AC2623F2289C676003EA11B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2623E2289C676003EA11B /* AppDelegate.swift */; };
 		4AC262412289C676003EA11B /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC262402289C676003EA11B /* SupportViewController.swift */; };
 		4AC262442289C676003EA11B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC262422289C676003EA11B /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A5F419A228FB7CD008CC016 /* LongPressTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressTableViewDelegate.swift; sourceTree = "<group>"; };
 		4AC2623B2289C676003EA11B /* CallForSupport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallForSupport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC2623E2289C676003EA11B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AC262402289C676003EA11B /* SupportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				4AC2623E2289C676003EA11B /* AppDelegate.swift */,
+				4A5F419A228FB7CD008CC016 /* LongPressTableViewDelegate.swift */,
 				4AC262522289F045003EA11B /* PhoneNumber.swift */,
 				4AC262542289F06E003EA11B /* SupportRegion.swift */,
 				4AC262402289C676003EA11B /* SupportViewController.swift */,
@@ -151,6 +154,7 @@
 			files = (
 				4AC262412289C676003EA11B /* SupportViewController.swift in Sources */,
 				4AC2623F2289C676003EA11B /* AppDelegate.swift in Sources */,
+				4A5F419B228FB7CD008CC016 /* LongPressTableViewDelegate.swift in Sources */,
 				4AC262532289F045003EA11B /* PhoneNumber.swift in Sources */,
 				4AC262552289F06E003EA11B /* SupportRegion.swift in Sources */,
 			);

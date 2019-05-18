@@ -8,7 +8,11 @@ final class SupportViewController: UITableViewController {
   ]
 
   private var isOpeningPhoneURL = false
-  private var menuTimer: Timer?
+
+  private lazy var longPressDelegate = LongPressTableViewDelegate(
+    target: self,
+    action: #selector(showMenu(_:))
+  )
 
   override var canBecomeFirstResponder: Bool {
     return true
@@ -20,6 +24,8 @@ final class SupportViewController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    longPressDelegate.decorate(&tableView.delegate)
 
     NotificationCenter.default.addObserver(
       self,
@@ -62,28 +68,12 @@ extension SupportViewController {
 // MARK: - UITableViewDelegate
 
 extension SupportViewController {
-  override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-    menuTimer = Timer.scheduledTimer(
-      timeInterval: 0.5,
-      target: self,
-      selector: #selector(showMenu),
-      userInfo: indexPath,
-      repeats: false
-    )
-    return true
-  }
-
-  override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-    cancelMenuTimer()
-  }
-
   override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
     return UIMenuController.shared.isMenuVisible ? nil : indexPath
   }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let region = regions[indexPath.row]
-    defer { cancelMenuTimer() }
 
     UIApplication.shared.open(region.phoneNumber.url) { success in
       if success {
@@ -116,13 +106,11 @@ private extension SupportViewController {
 
   @objc func showMenu(_ sender: Any) {
     let cell: UITableViewCell
-    defer { cancelMenuTimer() }
 
     switch sender {
-    case let timer as Timer where timer == menuTimer:
-      let indexPath = timer.userInfo as! IndexPath
-      cell = tableView.cellForRow(at: indexPath)!
-      tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+    case let longPress as LongPressTableViewDelegate:
+      cell = tableView.cellForRow(at: longPress.indexPath)!
+      tableView.selectRow(at: longPress.indexPath, animated: false, scrollPosition: .none)
     case let selectedCell as UITableViewCell:
       cell = selectedCell
     default:
@@ -132,10 +120,5 @@ private extension SupportViewController {
     let menu = UIMenuController.shared
     menu.setTargetRect(cell.frame, in: tableView)
     menu.setMenuVisible(true, animated: true)
-  }
-
-  func cancelMenuTimer() {
-    menuTimer?.invalidate()
-    menuTimer = nil
   }
 }
