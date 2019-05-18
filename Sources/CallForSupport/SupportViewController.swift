@@ -9,11 +9,6 @@ final class SupportViewController: UITableViewController {
 
   private var isOpeningPhoneURL = false
 
-  private lazy var longPressDelegate = LongPressTableViewDelegate(
-    target: self,
-    action: #selector(showMenu(_:))
-  )
-
   override var canBecomeFirstResponder: Bool {
     return true
   }
@@ -24,8 +19,6 @@ final class SupportViewController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
-    longPressDelegate.decorate(&tableView.delegate)
 
     NotificationCenter.default.addObserver(
       self,
@@ -68,8 +61,17 @@ extension SupportViewController {
 // MARK: - UITableViewDelegate
 
 extension SupportViewController {
-  override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-    return UIMenuController.shared.isMenuVisible ? nil : indexPath
+  override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+
+  override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+    return canPerformAction(action, withSender: sender)
+  }
+
+  override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+    UIApplication.shared.sendAction(action, to: self, from: sender, for: nil)
   }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -79,7 +81,9 @@ extension SupportViewController {
       if success {
         self.isOpeningPhoneURL = true
       } else if let cell = tableView.cellForRow(at: indexPath) {
-        self.showMenu(cell)
+        let menu = UIMenuController.shared
+        menu.setTargetRect(cell.frame, in: tableView)
+        menu.setMenuVisible(true, animated: true)
       } else {
         tableView.deselectRow(at: indexPath, animated: true)
       }
@@ -102,23 +106,5 @@ private extension SupportViewController {
     default:
       break
     }
-  }
-
-  @objc func showMenu(_ sender: Any) {
-    let cell: UITableViewCell
-
-    switch sender {
-    case let longPress as LongPressTableViewDelegate:
-      cell = tableView.cellForRow(at: longPress.indexPath)!
-      tableView.selectRow(at: longPress.indexPath, animated: false, scrollPosition: .none)
-    case let selectedCell as UITableViewCell:
-      cell = selectedCell
-    default:
-      return
-    }
-
-    let menu = UIMenuController.shared
-    menu.setTargetRect(cell.frame, in: tableView)
-    menu.setMenuVisible(true, animated: true)
   }
 }
