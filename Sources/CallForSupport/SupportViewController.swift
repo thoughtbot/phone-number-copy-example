@@ -61,6 +61,19 @@ extension SupportViewController {
 // MARK: - UITableViewDelegate
 
 extension SupportViewController {
+  override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+
+  override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+    return canPerformAction(action, withSender: sender)
+  }
+
+  override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+    tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+    UIApplication.shared.sendAction(action, to: self, from: sender, for: nil)
+  }
+
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let region = regions[indexPath.row]
 
