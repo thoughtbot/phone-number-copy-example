@@ -9,6 +9,14 @@ final class SupportViewController: UITableViewController {
 
   private var isOpeningPhoneURL = false
 
+  override var canBecomeFirstResponder: Bool {
+    return true
+  }
+
+  override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+    return action == #selector(copy(_:))
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -18,6 +26,19 @@ final class SupportViewController: UITableViewController {
       name: UIApplication.didBecomeActiveNotification,
       object: nil
     )
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(clearSelection),
+      name: UIMenuController.willHideMenuNotification,
+      object: nil
+    )
+  }
+
+  override func copy(_ sender: Any?) {
+    guard let indexPath = tableView.indexPathForSelectedRow else { return }
+    let region = regions[indexPath.row]
+    UIPasteboard.general.string = region.phoneNumber.rawValue
   }
 }
 
@@ -46,6 +67,10 @@ extension SupportViewController {
     UIApplication.shared.open(region.phoneNumber.url) { success in
       if success {
         self.isOpeningPhoneURL = true
+      } else if let cell = tableView.cellForRow(at: indexPath) {
+        let menu = UIMenuController.shared
+        menu.setTargetRect(cell.frame, in: tableView)
+        menu.setMenuVisible(true, animated: true)
       } else {
         tableView.deselectRow(at: indexPath, animated: true)
       }
@@ -56,9 +81,17 @@ extension SupportViewController {
 // MARK: - Private
 
 private extension SupportViewController {
-  @objc func clearSelection() {
-    guard let indexPath = tableView.indexPathForSelectedRow, isOpeningPhoneURL else { return }
-    isOpeningPhoneURL = false
-    tableView.deselectRow(at: indexPath, animated: true)
+  @objc func clearSelection(_ notification: Notification) {
+    guard let indexPath = tableView.indexPathForSelectedRow else { return }
+
+    switch notification.name {
+    case UIApplication.didBecomeActiveNotification where isOpeningPhoneURL:
+      isOpeningPhoneURL = false
+      tableView.deselectRow(at: indexPath, animated: true)
+    case UIMenuController.willHideMenuNotification:
+      tableView.deselectRow(at: indexPath, animated: true)
+    default:
+      break
+    }
   }
 }
